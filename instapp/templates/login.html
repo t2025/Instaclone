@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Instagram Clone</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Cedarville+Cursive" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Volkhov" rel="stylesheet">
+    <style>
+        body{
+ }
+        .form{
+        background: #f5f5f5;
+
+        }
+        h1{
+        font-family:'Bad Script', cursive;
+        }
+        h3{
+        font-family: 'Volkhov', serif;
+}
+.post-btn{
+background-color:#3897f0;
+border:#3897f0;
+width: 320px;
+border-radius: 10px;
+color: white;
+height: 40px;
+}
+    </style>
+</head>
+<body>
+<div class="row">
+ <div class=" image col-md-7">
+
+    <img class="image"src="/static/insta.jpg" alt="insta">
+     </div>
+    <div class=" form col-md-3">
+ <form method="post">
+       {%csrf_token%}
+  <div class="form-group">
+      	<div class="main">
+            <h1> InstaClone</h1>
+            <h3>LogIn</h3>
+    </div>
+
+            <div>
+                <label for="username">Username: </label>
+                <input id="username" type="text" name="username" class="form-control" value={{ username }}>
+            </div>
+
+
+            <div>
+                <label for="password">Password: </label>
+                <input id="password" type="password" name="password" class="form-control" value={{ password }}>
+            </div>
+  <br><br>
+                <input type="submit"class="post-btn" value="Log In">
+  </div>
+        </form>
+</div>
+</div>
+</body>
+</html>

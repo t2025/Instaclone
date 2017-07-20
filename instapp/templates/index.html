@@ -1,0 +1,118 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Instagram Clone</title>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Cedarville+Cursive" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Volkhov" rel="stylesheet">
+    <style>
+        body{
+
+        background=grey;
+
+        }
+        .form{
+        background: #f5f5f5;
+
+        }
+        h1{
+        font-family:'Bad Script', cursive;
+        }
+        h4{
+        font-family: 'Volkhov', serif;
+        text-align: center;
+}
+.image{
+height: 100% !important ;
+}
+label{
+font-family: 'Volkhov', serif
+}
+.post-btn{
+background-color:#3897f0;
+border:#3897f0;
+width: 400px;
+border-radius: 10px;
+color: white;
+height: 40px;
+}
+.login
+{
+width:470px;
+ background: #f5f5f5;
+ margin-top: -40px;
+ }
+ .login{
+ text-align :left;
+ }
+ .userlogin{
+ text-align:left;
+ }
+
+    </style>
+</head>
+<body>
+ <div class="row">
+     <div class=" image col-md-7">
+
+    <img class="image"src="/static/insta.jpg" alt="insta">
+     </div>
+
+        <div class=" form col-md-4">
+	<div class="main">
+            <h1> InstaClone</h1>
+            <h4>Sign Up to see photos and videos from your friends</h4>
+    </div>
+
+
+       <form method="post">
+       {%csrf_token%}
+  <div class="form-group">
+
+            <div>
+                <label for="username">Username: </label>
+                <input id="username" type="text" name="username" class="form-control" value={{ username }}>
+            </div>
+
+            <div>
+                <label for="name">Name: </label>
+                <input id="name" type="text" name="name" class="form-control" value={{ name }}>
+            </div>
+
+            <div>
+                <label for="email">Email: </label>
+                <input id="email" type="text" name="email" class="form-control" value={{ email }}>
+            </div>
+
+            <div>
+                <label for="password">Password: </label>
+                <input id="password" type="password" name="password" class="form-control" value={{ password }}>
+            </div>
+  <br><br>
+                <input type="submit" class="post-btn"value="Sign Up">
+  </div>
+        </form>
+        </div>
+ </div>
+            <br><br>
+ <div class="row">
+     <div class="login col-md-5 col-md-offset-7"> <span><h4 class="userlogin"> Already a user</h4></span><span class="link"><a href="login/">Login</a></span></div>
+ </div>
+
+
+
+
+
+
+</body>
+</html>
