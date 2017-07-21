@@ -5,13 +5,63 @@ from django.contrib.auth.hashers import make_password, check_password
 from datetime import timedelta
 from django.utils import timezone
 from instaclone.settings import BASE_DIR
-
+from django.forms.models import model_to_dict
 from imgurpython import ImgurClient
+import sendgrid
+import smtplib
+import os
+from sendgrid.helpers.mail import *
+from django.core.mail import EmailMessage
+from django.http import HttpRequest,HttpResponse
+from django.http import JsonResponse
+from json import dumps
+from django.core import serializers
+
+from clarifai.rest import ClarifaiApp
+API_KEY="b8500b2bf3104a7b9a228793e2f97668 "
+
+
+app = ClarifaiApp(api_key=API_KEY)
+model = app.models.get('food-items-v1.0')
+
+
+response = model.predict_by_url(url='https://www.elementstark.com/woocommerce-extension-demos/wp-content/uploads/sites/2/2016/12/pizza.jpg')
+print response
+email=User.email
+
+sub="Thanks for like or comment on post"
+from_email="tanviranga.100@gmail.com"
+from_name="Tanvi Ranga"
+message="Hello User! You have recently liked or posted a comment on a post.Thanks for using Instaclone."
+
+my_client = sendgrid.SendGridAPIClient(apikey=os.environ.get('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'))
+#Function to create payload
+
+def create_payload(sub,message,email):
+    from_email = "jsparrow725@gmail.com"
+    from_name = "Smart P2P Marketplace"
+
+    payload = {
+            "personalizations":[{
+                "to":[{"email":email }],
+                "subject": sub
+            }],
+            "from": {
+                "email": from_email,
+                "name": from_name
+            },
+            "content": [{
+                "type":"text/html",
+                "value": message
+            }]
+        }
+    return payload
+
 
 
 # Create your views here.
-YOUR_CLIENT_ID="8ef57b6031e7dcd"
-YOUR_CLIENT_SECRET="ce49c9b0e3260712bede8c56a71f647d8b39e613"
+YOUR_CLIENT_ID="6c5b3d0137c9823"
+YOUR_CLIENT_SECRET="45cfe34d37335be9695957581aa2d4455beeac7e"
 def signup_view(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
@@ -69,18 +119,21 @@ def post_view(request):
                 caption = form.cleaned_data.get('caption')
                 post = PostModel(user=user, image=image, caption=caption)
                 post.save()
+                #import pdb;pdb.set_trace()
 
-                path = str(BASE_DIR +'/'+ post.image.url)
+                path=str(BASE_DIR+"/"+post.image.url)
 
                 client = ImgurClient(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET)
-                post.image_url = client.upload_from_path(path, anon=True)['link']
+
+                temp=client.upload_from_path(path,anon=True)
+                post.image_url = temp['link']
                 post.save()
 
                 return redirect('/feed/')
 
         else:
             form = PostForm()
-        return render(request, 'post.html', {'form': form})
+        return render(request, 'post.html', {'form' : form})
     else:
         return redirect('/login/')
 
@@ -89,7 +142,7 @@ def feed_view(request):
     user = check_validation(request)
     if user:
 
-        posts = PostModel.objects.all().order_by('created_on')
+        posts = PostModel.objects.all().order_by('-created_on')
 
         for post in posts:
             existing_like = LikeModel.objects.filter(post_id=post.id, user=user).first()
@@ -109,11 +162,19 @@ def like_view(request):
         if form.is_valid():
             post_id = form.cleaned_data.get('post').id
             existing_like = LikeModel.objects.filter(post_id=post_id, user=user).first()
+            LikeModel.objects.create(post_id=post_id, user=user)
             if not existing_like:
+
                 LikeModel.objects.create(post_id=post_id, user=user)
+
+
+
+
             else:
-                existing_like.delete()
+             existing_like.delete()
+
             return redirect('/feed/')
+
     else:
         return redirect('/login/')
 
@@ -127,11 +188,17 @@ def comment_view(request):
             comment_text = form.cleaned_data.get('comment_text')
             comment = CommentModel.objects.create(user=user, post_id=post_id, comment_text=comment_text)
             comment.save()
+            payload = create_payload(sub, message, email)
+            response = my_client.client.mail.send.post(request_body=payload)
+            print response
+
+
             return redirect('/feed/')
         else:
             return redirect('/feed/')
     else:
         return redirect('/login')
+
 
 
 # For validating the session
