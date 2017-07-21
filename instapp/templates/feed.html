@@ -14,37 +14,24 @@
 <link href="https://fonts.googleapis.com/css?family=Cedarville+Cursive" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Volkhov" rel="stylesheet">
-    <style>
-        .image{
-        text-align:center
-        }
-        .like{
-        text-align:center;
-        }
-        .btn{
-        text-align:center;
 
-        }
-        .caption{
-        text-align :center;
-        }
-
-    </style>
 </head>
 <body>
-    <form method="post" action="/post/">
+<h1>Instaclone</h1>
+<form method="post" action="/post/">
         {% csrf_token %}
         <input type="submit" class="btn-default btn" value="Create Post">
     </form>
 
 
 
+
     {% for post in posts %}
 
 
-        <h3 style="text-align:center"> Posted by: {{ post.user.username }} </h3>
+        <h3 > Posted by: {{ post.user.username }} </h3>
         <p>[{{ post.created_on }}]</p>
-    <div class="image">
+    <div class="image" >
         <img style="display:inline-block; width:350px; height:300px; text-align:center; border : solid 2px black;"
              src="{{ post.image_url }}" ><br>
     </div>
@@ -56,7 +43,7 @@
             {{ post.like_count }} likes this
         </div>
     </div>
-        <div style="display:inline-block;"  class=" col-md-3 ">
+        <div style="display:inline-block;" >
             <form method="POST" action="/like/">
               {% csrf_token %}
               <input type="hidden" name="post" value="{{ post.id }}" />
