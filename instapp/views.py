@@ -38,7 +38,7 @@ my_client = sendgrid.SendGridAPIClient(apikey=os.environ.get('SG.mvcNoA3SSkmafIC
 #Function to create payload
 
 def create_payload(sub,message,email):
-    from_email = "jsparrow725@gmail.com"
+    from_email = "tanviranga.100@gmail.com"
     from_name = "Smart P2P Marketplace"
 
     payload = {
