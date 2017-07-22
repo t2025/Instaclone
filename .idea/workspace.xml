@@ -3,18 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="536325cd-0a3d-443d-ab7f-7b8e373165d4" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instapp/static/Thumbs.db" afterPath="$PROJECT_DIR$/instapp/static/Thumbs.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instapp/static/insta.jpg" afterPath="$PROJECT_DIR$/instapp/static/insta.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/Thumbs.db" afterPath="$PROJECT_DIR$/static/Thumbs.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/insta.jpg" afterPath="$PROJECT_DIR$/static/insta.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instapp/forms.py" afterPath="$PROJECT_DIR$/instapp/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instapp/models.py" afterPath="$PROJECT_DIR$/instapp/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instapp/templates/feed.html" afterPath="$PROJECT_DIR$/instapp/templates/feed.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instapp/templates/index.html" afterPath="$PROJECT_DIR$/instapp/templates/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instapp/templates/login.html" afterPath="$PROJECT_DIR$/instapp/templates/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instapp/templates/post.html" afterPath="$PROJECT_DIR$/instapp/templates/post.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instapp/templates/success.html" afterPath="$PROJECT_DIR$/instapp/templates/success.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/instapp/views.py" afterPath="$PROJECT_DIR$/instapp/views.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -58,11 +47,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/instapp/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="546">
-              <caret line="191" column="19" lean-forward="true" selection-start-line="191" selection-start-column="19" selection-end-line="191" selection-end-column="19" />
+            <state relative-caret-position="506">
+              <caret line="105" column="26" lean-forward="false" selection-start-line="105" selection-start-column="26" selection-end-line="105" selection-end-column="26" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
               </folding>
@@ -74,7 +63,7 @@
         <entry file="file://$PROJECT_DIR$/instapp/models.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="546">
-              <caret line="59" column="50" lean-forward="true" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
+              <caret line="59" column="50" lean-forward="false" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
               </folding>
@@ -112,7 +101,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="success.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="success.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/instapp/templates/success.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="512">
@@ -166,12 +155,12 @@
         <option value="$PROJECT_DIR$/instaclone/settings.py" />
         <option value="$PROJECT_DIR$/instapp/forms.py" />
         <option value="$PROJECT_DIR$/instapp/models.py" />
-        <option value="$PROJECT_DIR$/instapp/views.py" />
         <option value="$PROJECT_DIR$/instapp/templates/feed.html" />
         <option value="$PROJECT_DIR$/instapp/templates/index.html" />
         <option value="$PROJECT_DIR$/instapp/templates/login.html" />
         <option value="$PROJECT_DIR$/instapp/templates/post.html" />
         <option value="$PROJECT_DIR$/instapp/templates/success.html" />
+        <option value="$PROJECT_DIR$/instapp/views.py" />
       </list>
     </option>
   </component>
@@ -276,7 +265,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SearchEverywhereHistoryKey" value="django.db.models&#9;null&#9;null" />
   </component>
@@ -404,7 +393,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17642753" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18229954" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -761,19 +750,9 @@
     <entry file="file://$PROJECT_DIR$/instapp/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="546">
-          <caret line="59" column="50" lean-forward="true" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
+          <caret line="59" column="50" lean-forward="false" selection-start-line="59" selection-start-column="50" selection-end-line="59" selection-end-column="50" />
           <folding>
             <element signature="e#24#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/instapp/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="191" column="19" lean-forward="true" selection-start-line="191" selection-start-column="19" selection-end-line="191" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#45#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -826,6 +805,16 @@
         <state relative-caret-position="512">
           <caret line="44" column="19" lean-forward="false" selection-start-line="44" selection-start-column="19" selection-end-line="44" selection-end-column="19" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instapp/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="506">
+          <caret line="105" column="26" lean-forward="false" selection-start-line="105" selection-start-column="26" selection-end-line="105" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

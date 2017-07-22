@@ -11,21 +11,19 @@ from imgurpython import ImgurClient
 import sendgrid
 from sendgrid.helpers.mail import *
 #imporing Clarifai
-from clarifai.rest import ClarifaiApp
+from clarifai.rest import ClarifaiApp , Image
+import json
+import requests
 API_KEY="b8500b2bf3104a7b9a228793e2f97668 "
 
 #Clarifai code demo
-app = ClarifaiApp(api_key=API_KEY)
-model = app.models.get('food-items-v1.0')
 
 
-response = model.predict_by_url(url='https://www.elementstark.com/woocommerce-extension-demos/wp-content/uploads/sites/2/2016/12/pizza.jpg')
-print response
 email=User.email
 
 
 #Sendgrid Api call
-SENDGRID_APIKEY = "YOUR_API_KEY_HERE"
+SENDGRID_APIKEY = "YOUR_API_KEY-HERE"
 sg = sendgrid.SendGridAPIClient(apikey=SENDGRID_APIKEY)
 #IMGUR client Id and secret
 YOUR_CLIENT_ID="6c5b3d0137c9823"
@@ -98,6 +96,14 @@ def post_view(request):
                 temp=client.upload_from_path(path,anon=True)
                 post.image_url = temp['link']
                 post.save()
+                # logos for awarding points
+                app = ClarifaiApp(api_key=API_KEY)
+                model = app.models.get('logo')
+                image = Image(url=post.image_url)
+                response = model.predict([image])
+                # print response
+                data = response['outputs'][0]['data']
+                print data
 
                 return redirect('/feed/')
 
