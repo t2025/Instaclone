@@ -14,62 +14,121 @@
 <link href="https://fonts.googleapis.com/css?family=Cedarville+Cursive" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Volkhov" rel="stylesheet">
+    <style>
+    body{
+     background: #f5f5f5;
+     }
+
+        h1{
+         font-family:'Bad Script', cursive;
+        text-align :center;
+        color:#3897f0;
+        font-weight: bold;
+        }
+        h3{
+        font-family: 'Volkhov', serif;
+        text-align:center;
+        }
+        .caption{
+
+        text-align: center;
+        }
+        #picture{
+        margin-top: -80px;
+        margin-left : 20px;
+        background-color:#3897f0;
+        border:#3897f0;
+        color: white;
+        }
+
+
+.like
+{
+       background-color:#3897f0;
+        border:#3897f0;
+        color: white;
+
+        }
+
+.comment{
+   background-color:#3897f0;
+        border:#3897f0;
+        color: white;
+
+
+        }
+        .like-count
+        {
+        display : inline-block;
+       text-align : center;
+        }
+
+
+    </style>
 
 </head>
 <body>
 <h1>Instaclone</h1>
+<!--Form for creating post-->
 <form method="post" action="/post/">
         {% csrf_token %}
-        <input type="submit" class="btn-default btn" value="Create Post">
+        <input type="submit" class="btn-default btn" id ="picture" value="Create Post">
     </form>
-
-
-
-
-    {% for post in posts %}
+<!--Looping for multiple posts-->
+{% for post in posts %}
 
 
         <h3 > Posted by: {{ post.user.username }} </h3>
+<div class="time-stamp" style="text-align:center">
         <p>[{{ post.created_on }}]</p>
-    <div class="image" >
+    </div>
+    <div class="image"style="text-align : center;" >
         <img style="display:inline-block; width:350px; height:300px; text-align:center; border : solid 2px black;"
              src="{{ post.image_url }}" ><br>
     </div>
-    <div class="caption">
 
-        <span  style="display:inline-block; text-align:center">{{ post.caption }}</span></div><br/><br/>
-    <div class="row">
-        <div style="display:inline-block" >
+    <div class="caption" >
+
+        <span  style="display:inline-block; ">{{ post.caption }}</span></div><br/>
+
+      <div  class="like-count" style="text-align:center; margin-left : 500px; display :inline-block; " >
             {{ post.like_count }} likes this
         </div>
-    </div>
-        <div style="display:inline-block;" >
+<div class="like-button" style="margin-left : 500px;">
+<!--Posting like-->
             <form method="POST" action="/like/">
               {% csrf_token %}
               <input type="hidden" name="post" value="{{ post.id }}" />
                 {% if post.has_liked %}
-                <input type="submit" class="btn btn-default" value="Unlike">
+                <input type="submit" class=" like btn btn-default" value="Unlike">
                 {% else %}
-                <input type="submit" class="btn btn-default" value="Like">
+                <input type="submit" class=" unlike btn btn-default" value="Like">
                 {% endif %}
             </form>
-        </div>
-
-        <div>
+    </div>
+<!--Posting comment-->
+ <div style="display : inline -block ; margin-left : 600px; margin-top :-35px;">
             <form method="POST" action="/comment/">
                 {% csrf_token %}
                 <input type="hidden" name="post" value="{{ post.id }}" />
                 <input type="text" name="comment_text" id="comment_text" placeholder="Make a comment.." value="{{ comment_text }}">
                 {{ comment_text }}
-                <input type="submit" class="btn-default btn" value="Comment">
+                <input type="submit" class="comment btn btn-default " value="Comment">
+
             </form>
         </div>
 
-        <div>
+<!--Showing comments-->
+        <div style="text-align :center;">
             {% for comment in post.comments %}
                 <p><b>{{ comment.user.username }} [{{ comment.created_on }}]:</b> {{ comment.comment_text }}</p>
             {% endfor %}
         </div>
+
+
+
+
+
 
     {% endfor %}
 </body>

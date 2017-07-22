@@ -5,22 +5,16 @@ from django.contrib.auth.hashers import make_password, check_password
 from datetime import timedelta
 from django.utils import timezone
 from instaclone.settings import BASE_DIR
-from django.forms.models import model_to_dict
+#importing ImGur
 from imgurpython import ImgurClient
+#importing sendgrid for sending emails
 import sendgrid
-import smtplib
-import os
 from sendgrid.helpers.mail import *
-from django.core.mail import EmailMessage
-from django.http import HttpRequest,HttpResponse
-from django.http import JsonResponse
-from json import dumps
-from django.core import serializers
-
+#imporing Clarifai
 from clarifai.rest import ClarifaiApp
 API_KEY="b8500b2bf3104a7b9a228793e2f97668 "
 
-
+#Clarifai code demo
 app = ClarifaiApp(api_key=API_KEY)
 model = app.models.get('food-items-v1.0')
 
@@ -29,42 +23,18 @@ response = model.predict_by_url(url='https://www.elementstark.com/woocommerce-ex
 print response
 email=User.email
 
-sub="Thanks for like or comment on post"
-from_email="tanviranga.100@gmail.com"
-from_name="Tanvi Ranga"
-message="Hello User! You have recently liked or posted a comment on a post.Thanks for using Instaclone."
 
-my_client = sendgrid.SendGridAPIClient(apikey=os.environ.get('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'))
-#Function to create payload
-
-def create_payload(sub,message,email):
-    from_email = "Your _email_here"
-    from_name = "Upload to win"
-
-    payload = {
-            "personalizations":[{
-                "to":[{"email":email }],
-                "subject": sub
-            }],
-            "from": {
-                "email": from_email,
-                "name": from_name
-            },
-            "content": [{
-                "type":"text/html",
-                "value": message
-            }]
-        }
-    return payload
-
-
-
-# Create your views here.
+#Sendgrid Api call
+SENDGRID_APIKEY = "YOUR_API_KEY_HERE"
+sg = sendgrid.SendGridAPIClient(apikey=SENDGRID_APIKEY)
+#IMGUR client Id and secret
 YOUR_CLIENT_ID="6c5b3d0137c9823"
 YOUR_CLIENT_SECRET="45cfe34d37335be9695957581aa2d4455beeac7e"
+#Method for signup
 def signup_view(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
+        #Form validation check
         if form.is_valid():
             username = form.cleaned_data['username']
             name = form.cleaned_data['name']
@@ -74,13 +44,13 @@ def signup_view(request):
             user = User(name=name, password=make_password(password), email=email, username=username)
             user.save()
             return render(request, 'success.html')
-            # return redirect('login/')
+
     else:
         form = SignUpForm()
 
     return render(request, 'index.html', {'form': form})
 
-
+#Login view method
 def login_view(request):
     response_data = {}
     if request.method == "POST":
@@ -107,7 +77,7 @@ def login_view(request):
     response_data['form'] = form
     return render(request, 'login.html', response_data)
 
-
+#Method for posting pictures
 def post_view(request):
     user = check_validation(request)
 
@@ -153,8 +123,7 @@ def feed_view(request):
     else:
 
         return redirect('/login/')
-
-
+ #Method for liking a picture
 def like_view(request):
     user = check_validation(request)
     if user and request.method == 'POST':
@@ -162,23 +131,26 @@ def like_view(request):
         if form.is_valid():
             post_id = form.cleaned_data.get('post').id
             existing_like = LikeModel.objects.filter(post_id=post_id, user=user).first()
-            LikeModel.objects.create(post_id=post_id, user=user)
             if not existing_like:
-
                 LikeModel.objects.create(post_id=post_id, user=user)
-
-
-
+                #code for sending an email after successful like
+                from_email = Email("test@sendgrid.com")
+                to_email = Email("tanviranga.100@gmail.com")
+                subject = "Welcome to Instaclone"
+                content = Content("text/plain", "Thanks for liking this post!")
+                mail = Mail(from_email, subject, to_email, content)
+                response = sg.client.mail.send.post(request_body=mail.get())
+                print(response.status_code)
+                print(response.body)
+                print(response.headers)
 
             else:
-             existing_like.delete()
-
+                existing_like.delete()
             return redirect('/feed/')
-
     else:
         return redirect('/login/')
 
-
+#code for posting comment on pictures
 def comment_view(request):
     user = check_validation(request)
     if user and request.method == 'POST':
@@ -188,9 +160,16 @@ def comment_view(request):
             comment_text = form.cleaned_data.get('comment_text')
             comment = CommentModel.objects.create(user=user, post_id=post_id, comment_text=comment_text)
             comment.save()
-            payload = create_payload(sub, message, email)
-            response = my_client.client.mail.send.post(request_body=payload)
-            print response
+            #code for sending email after successful comment
+            from_email = Email("test@sendgrid.com")
+            to_email = Email("tanviranga.100@gmail.com")
+            subject = "Welcome to instaclone"
+            content = Content("text/plain", "Thanks for commenting on this post")
+            mail = Mail(from_email, subject, to_email, content)
+            response = sg.client.mail.send.post(request_body=mail.get())
+            print(response.status_code)
+            print(response.body)
+            print(response.headers)
 
 
             return redirect('/feed/')

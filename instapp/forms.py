@@ -14,7 +14,6 @@ class LoginForm(forms.ModelForm):
 class PostForm(forms.ModelForm) :
     caption = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Caption'}))
 
-
     class Meta:
         model=PostModel
         fields=['image','caption']
