@@ -11,7 +11,7 @@ from imgurpython import ImgurClient
 import sendgrid
 from sendgrid.helpers.mail import *
 #imporing Clarifai
-from clarifai.rest import ClarifaiApp , Image
+from clarifai.rest import ClarifaiApp ,Image
 import json
 import requests
 API_KEY="b8500b2bf3104a7b9a228793e2f97668 "
@@ -97,22 +97,29 @@ def post_view(request):
                 post.image_url = temp['link']
                 post.save()
                 # logos for awarding points
+                # url=form.cleaned_data.get('post').image_url
+                url = post.image_url
                 app = ClarifaiApp(api_key=API_KEY)
                 model = app.models.get('logo')
-                image = Image(url=post.image_url)
+                image = Image(url=url)
                 response = model.predict([image])
-                # print response
-                data = response['outputs'][0]['data']
+                data = response['outputs'][0]['data']['regions'][0]['data']['concepts'][0]['name']
                 print data
+                if data=="Starbucks":
+                   userpoints=user.points+20
+                   print userpoints
+                   user=User(username=user.username ,email=user.email,password=user.password,points=userpoints)
+                   user.save()
+                   print user
 
+                   return redirect('/points/')
                 return redirect('/feed/')
 
         else:
-            form = PostForm()
-        return render(request, 'post.html', {'form' : form})
+          form = PostForm()
+        return render(request, 'post.html', {'form': form})
     else:
-        return redirect('/login/')
-
+     return redirect('/login/')
 
 def feed_view(request):
     user = check_validation(request)

@@ -74,6 +74,11 @@
         {% csrf_token %}
         <input type="submit" class="btn-default btn" id ="picture" value="Create Post">
     </form>
+<form method="post"action="/points/">
+
+    <input type="submit" class="btn btn default" value ="Points">
+
+</form>
 <!--Looping for multiple posts-->
 {% for post in posts %}
 
@@ -124,6 +129,7 @@
                 <p><b>{{ comment.user.username }} [{{ comment.created_on }}]:</b> {{ comment.comment_text }}</p>
             {% endfor %}
         </div>
+
 
 
 

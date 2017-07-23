@@ -22,7 +22,8 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
-    #url('feed/', feed_view),
+    url('points/',like_view),
+
     url('comment/', comment_view),
     url('like/', like_view),
     url('post/', post_view),

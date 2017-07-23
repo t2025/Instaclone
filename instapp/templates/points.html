@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Points</title>
+</head>
+<body>
+<h1> Winning Board </h1>
+<div style="display : inline -block ; margin-left : 600px; margin-top :-35px;">
+
+
+        </div>
+ <div style="text-align :center;">
+            {% for points in user.points %}
+                <p><b>{{user.username}}</b>{{ user.points }}</p>
+            {% endfor %}
+        </div>
+</body>
+</html>
