@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import logout
+from django.shortcuts import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from forms import SignUpForm, LoginForm, PostForm, LikeForm, CommentForm
 from models import User, SessionToken, PostModel, LikeModel, CommentModel
 from django.contrib.auth.hashers import make_password, check_password
@@ -41,8 +42,11 @@ def signup_view(request):
             password = form.cleaned_data['password']
             # saving data to DB
             user = User(name=name, password=make_password(password), email=email, username=username)
-            user.save()
-            return render(request, 'success.html')
+            if (len(username)>=5 and len(password)>=4):
+             user.save()
+             return render(request, 'success.html')
+
+
 
     else:
         form = SignUpForm()
@@ -231,5 +235,13 @@ def check_validation(request):
                 return session.user
     else:
         return None
+#Logging out 
+def logout_view(requests):
+    response = HttpResponseRedirect('/login/')
+    response.delete_cookie('session_token')
+
+    return response
+
+
 
 

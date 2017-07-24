@@ -47,6 +47,13 @@
         margin-left:150px;
         margin-top :-90px;
         }
+#logout{
+background-color:#3897f0;
+        border:#3897f0;
+        color: white;
+        margin-left: 1200px;
+        margin-top:-60px;
+        }
 
 
 .like
@@ -77,6 +84,10 @@ margin-left :10px;
 </head>
 <body>
 <h1>Instaclone</h1>
+<form method="post" action="/Logout/">
+        {% csrf_token %}
+        <input type="submit" class="btn-default btn" id ="logout" value="Logout">
+    </form>
 <form method="post" action="/points/">
         {% csrf_token %}
         <input type="submit" class="btn-default btn" id ="points" value="Points">
@@ -140,6 +151,7 @@ margin-left :10px;
 </p>{% endfor %}
         </div>
 {%endfor%}
+<!--for upvoting comments-->
 <script>
  $(".glyphicon-thumbs-up").click(function(){
   console.log("tanvi");
