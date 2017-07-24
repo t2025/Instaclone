@@ -128,6 +128,7 @@ def post_view(request):
                     print userpoints
                     user.points=userpoints
                     print userpoints
+                    user.save()
 
 
 
