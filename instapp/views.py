@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import logout
 from forms import SignUpForm, LoginForm, PostForm, LikeForm, CommentForm
 from models import User, SessionToken, PostModel, LikeModel, CommentModel
 from django.contrib.auth.hashers import make_password, check_password
@@ -97,7 +98,7 @@ def post_view(request):
                 post.image_url = temp['link']
                 post.save()
                 # logos for awarding points
-                # url=form.cleaned_data.get('post').image_url
+
                 url = post.image_url
                 app = ClarifaiApp(api_key=API_KEY)
                 model = app.models.get('logo')
@@ -108,18 +109,44 @@ def post_view(request):
                 if data=="Starbucks":
                    userpoints=user.points+20
                    print userpoints
-                   user=User(username=user.username ,email=user.email,password=user.password,points=userpoints)
+
+                   user.points=userpoints
                    user.save()
                    print user
+                elif data=="Apple Inc":
+                    userpoints=user.points+50
+                    print userpoints
+                    user.points=userpoints
+                    user.save()
+                elif data=="Dove":
+                    userpoints = user.points + 70
+                    print userpoints
+                    user.points = userpoints
+                    user.save()
+                elif data=="Burger King":
+                    userpoints=user.points+150
+                    print userpoints
+                    user.points=userpoints
+                    print userpoints
 
-                   return redirect('/points/')
+
+
+
                 return redirect('/feed/')
 
         else:
+
           form = PostForm()
         return render(request, 'post.html', {'form': form})
     else:
      return redirect('/login/')
+#points view to see awarded points
+def points_view(request):
+    user=check_validation(request)
+    if user:
+     points=user.points
+     print points
+     return render(request, 'points.html',{'points':points})
 
 def feed_view(request):
     user = check_validation(request)
@@ -203,3 +230,5 @@ def check_validation(request):
                 return session.user
     else:
         return None
+
+

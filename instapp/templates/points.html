@@ -1,19 +1,47 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Points</title>
+    <title>Title</title>
+        <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Cedarville+Cursive" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bad+Script" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Volkhov" rel="stylesheet">
+    <style>
+    body{
+    background:#f5f5f5;
+    }
+    .title
+    {
+    font-size:35px;
+    font-family: 'Volkhov' , sans-serif;
+    color: black;
+    }
+        .heading{
+     font-size:60px;
+     font-family:'Bad Script', cursive;
+     text-align :center;
+     color :#3897f0;
+     }
+
+
+    </style>
 </head>
+<!--Template to show awarded points-->
 <body>
-<h1> Winning Board </h1>
-<div style="display : inline -block ; margin-left : 600px; margin-top :-35px;">
-
-
-        </div>
- <div style="text-align :center;">
-            {% for points in user.points %}
-                <p><b>{{user.username}}</b>{{ user.points }}</p>
-            {% endfor %}
-        </div>
+<div>
+    <h1 class="title"> Upload the logo picture of Starbucks , Apple , Dove , Burger King to win points</h1><br><br><br><br>
+    <h1 class="heading">You have scored</h1>
+<br>
+   <h1 class="heading">{{points}} points</h1>
+</div>
 </body>
 </html>

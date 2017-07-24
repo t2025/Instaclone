@@ -15,14 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from instapp.views import signup_view,login_view,post_view,feed_view,like_view,comment_view
+from instapp.views import signup_view,login_view,post_view,feed_view,like_view,comment_view,points_view
 from django.conf import settings
 from django.conf.urls.static import static
 
 
 
 urlpatterns = [
-    url('points/',like_view),
+
+    url('points/',points_view),
 
     url('comment/', comment_view),
     url('like/', like_view),
