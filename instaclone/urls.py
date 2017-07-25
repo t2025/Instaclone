@@ -16,12 +16,15 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from instapp.views import signup_view,login_view,post_view,feed_view,like_view,comment_view,points_view,logout_view
+
 from django.conf import settings
 from django.conf.urls.static import static
 
 
 
 urlpatterns = [
+   url(r'^admin/',admin.site.urls),
+    url(r'^feed/',feed_view),
     url('logout/',logout_view),
     url('points/',points_view),
 

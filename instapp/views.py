@@ -156,6 +156,7 @@ def points_view(request):
 def feed_view(request):
     user = check_validation(request)
     if user:
+        username=user.username
 
         posts = PostModel.objects.all().order_by('-created_on')
 
@@ -165,9 +166,13 @@ def feed_view(request):
                 post.has_liked = True
 
         return render(request, 'feed.html', {'posts': posts})
+        #for query string
+        if posts:
+            return HttpResponseRedirect(reverse('/feed/') +"?filter=username&sort=newest")
     else:
 
         return redirect('/login/')
+
  #Method for liking a picture
 def like_view(request):
     user = check_validation(request)
@@ -224,8 +229,6 @@ def comment_view(request):
         return redirect('/login')
 
 
-
-# For validating the session
 def check_validation(request):
     if request.COOKIES.get('session_token'):
         session = SessionToken.objects.filter(session_token=request.COOKIES.get('session_token')).first()
@@ -235,7 +238,11 @@ def check_validation(request):
                 return session.user
     else:
         return None
-#Logging out 
+
+
+
+
+#Logging out
 def logout_view(requests):
     response = HttpResponseRedirect('/login/')
     response.delete_cookie('session_token')
