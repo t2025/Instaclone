@@ -25,7 +25,6 @@ class SessionToken(models.Model):
     def create_token(self):
         self.session_token = uuid.uuid4()
 
-
 #Post Model
 class PostModel(models.Model):
   user = models.ForeignKey(User)
@@ -35,7 +34,6 @@ class PostModel(models.Model):
   created_on = models.DateTimeField(auto_now_add=True)
   updated_on = models.DateTimeField(auto_now=True)
   has_liked = False
-
 
 #property for like counts
   @property

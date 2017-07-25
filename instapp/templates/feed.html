@@ -2,10 +2,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
-    <title>Title</title>
-
+    <title>Feeds</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -19,68 +17,62 @@
      }
 
         h1{
-         font-family:'Bad Script', cursive;
-        text-align :center;
-        color:#3897f0;
-        font-weight: bold;
-        font-size:60px;
+            font-family:'Bad Script', cursive;
+            text-align :center;
+            color:#3897f0;
+            font-weight: bold;
+            font-size:60px;
         }
         h3{
-        font-family: 'Volkhov', serif;
-        text-align:center;
-        }
-        .caption{
-
-        text-align: center;
+            font-family: 'Volkhov', serif;
+            text-align:center;
+            }
+            .caption{
+            text-align: center;
         }
         #picture{
-        margin-top: -130px;
-        margin-left : 20px;
-        background-color:#3897f0;
-        border:#3897f0;
-        color: white;
+            margin-top: -130px;
+            margin-left : 20px;
+            background-color:#3897f0;
+            border:#3897f0;
+            color: white;
         }
-#points{
-        background-color:#3897f0;
-        border:#3897f0;
-        color: white;
-        margin-left:150px;
-        margin-top :-90px;
+        #points{
+            background-color:#3897f0;
+            border:#3897f0;
+            color: white;
+            margin-left:150px;
+            margin-top :-90px;
         }
-#logout{
-background-color:#3897f0;
-        border:#3897f0;
-        color: white;
-        margin-left: 1200px;
-        margin-top:-60px;
-        }
-
-
-.like
-{
-       background-color:#3897f0;
-        border:#3897f0;
-        color: white;
-
+        #logout{
+              background-color:#3897f0;
+               border:#3897f0;
+               color: white;
+               margin-left: 1200px;
+               margin-top:-60px;
         }
 
-.comment{
-   background-color:#3897f0;
-        border:#3897f0;
-        color: white;
+        .like
+         {
+             background-color:#3897f0;
+             border:#3897f0;
+             color: white;
+          }
 
-
+        .comment{
+            background-color:#3897f0;
+            border:#3897f0;
+            color: white;
         }
         .like-count
         {
-        display : inline-block;
-       text-align : center;
+            display : inline-block;
+           text-align : center;
         }
 #icon{
-margin-left :10px;
+    margin-left :10px;
 }
  </style>
-
 </head>
 <body>
 <h1>Instaclone</h1>
@@ -92,31 +84,24 @@ margin-left :10px;
         {% csrf_token %}
         <input type="submit" class="btn-default btn" id ="points" value="Points">
     </form>
-
 <!--Form for creating post-->
 <form method="post" action="/post/">
-
     {%csrf_token %}
         <input type="submit" class="btn-default btn" id ="picture" value="Create Post">
     </form>
 
 <!--Looping for multiple posts-->
 {% for post in posts %}
-
-
-        <h3 > Posted by: {{ post.user.username }} </h3>
-<div class="time-stamp" style="text-align:center">
-        <p>[{{ post.created_on }}]</p>
+<h3 > Posted by: {{ post.user.username }} </h3>
+ <div class="time-stamp" style="text-align:center">
+     <p>[{{ post.created_on }}]</p>
     </div>
     <div class="image"style="text-align : center;" >
         <img style="display:inline-block; width:350px; height:300px; text-align:center; border : solid 2px black;"
              src="{{ post.image_url }}" ><br>
     </div>
-
-    <div class="caption" >
-
+<div class="caption" >
         <span  style="display:inline-block; ">{{ post.caption }}</span></div><br/>
-
       <div  class="like-count" style="text-align:center; margin-left : 500px; display :inline-block; " >
             {{ post.like_count }} likes this
         </div>
@@ -140,7 +125,6 @@ margin-left :10px;
                 <input type="text" name="comment_text" id="comment_text" placeholder="Make a comment.." value="{{ comment_text }}">
                 {{ comment_text }}
                 <input type="submit" class="comment btn btn-default " value="Comment">
-
             </form>
         </div>
 

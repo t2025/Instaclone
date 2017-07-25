@@ -17,19 +17,15 @@ from clarifai.rest import ClarifaiApp ,Image
 import json
 import requests
 API_KEY="b8500b2bf3104a7b9a228793e2f97668 "
-
-#Clarifai code demo
-
-
 email=User.email
-
-
 #Sendgrid Api call
 SENDGRID_APIKEY = "YOUR_API_KEY-HERE"
 sg = sendgrid.SendGridAPIClient(apikey=SENDGRID_APIKEY)
+
 #IMGUR client Id and secret
 YOUR_CLIENT_ID="6c5b3d0137c9823"
 YOUR_CLIENT_SECRET="45cfe34d37335be9695957581aa2d4455beeac7e"
+
 #Method for signup
 def signup_view(request):
     if request.method == "POST":
@@ -46,11 +42,8 @@ def signup_view(request):
              user.save()
              return render(request, 'success.html')
 
-
-
     else:
         form = SignUpForm()
-
     return render(request, 'index.html', {'form': form})
 
 #Login view method
@@ -62,7 +55,6 @@ def login_view(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = User.objects.filter(username=username).first()
-
             if user:
                 if check_password(password, user.password):
                     token = SessionToken(user=user)
@@ -76,14 +68,12 @@ def login_view(request):
 
     elif request.method == 'GET':
         form = LoginForm()
-
     response_data['form'] = form
     return render(request, 'login.html', response_data)
 
 #Method for posting pictures
 def post_view(request):
     user = check_validation(request)
-
     if user:
         if request.method == 'POST':
             form = PostForm(request.POST, request.FILES)
@@ -93,16 +83,12 @@ def post_view(request):
                 post = PostModel(user=user, image=image, caption=caption)
                 post.save()
                 #import pdb;pdb.set_trace()
-
                 path=str(BASE_DIR+"/"+post.image.url)
-
                 client = ImgurClient(YOUR_CLIENT_ID, YOUR_CLIENT_SECRET)
-
                 temp=client.upload_from_path(path,anon=True)
                 post.image_url = temp['link']
                 post.save()
                 # logos for awarding points
-
                 url = post.image_url
                 app = ClarifaiApp(api_key=API_KEY)
                 model = app.models.get('logo')
@@ -113,7 +99,6 @@ def post_view(request):
                 if data=="Starbucks":
                    userpoints=user.points+20
                    print userpoints
-
                    user.points=userpoints
                    user.save()
                    print user
@@ -133,14 +118,8 @@ def post_view(request):
                     user.points=userpoints
                     print userpoints
                     user.save()
-
-
-
-
                 return redirect('/feed/')
-
         else:
-
           form = PostForm()
         return render(request, 'post.html', {'form': form})
     else:
@@ -164,13 +143,11 @@ def feed_view(request):
             existing_like = LikeModel.objects.filter(post_id=post.id, user=user).first()
             if existing_like:
                 post.has_liked = True
-
         return render(request, 'feed.html', {'posts': posts})
         #for query string
         if posts:
             return HttpResponseRedirect(reverse('/feed/') +"?filter=username&sort=newest")
     else:
-
         return redirect('/login/')
 
  #Method for liking a picture
@@ -193,7 +170,6 @@ def like_view(request):
                 print(response.status_code)
                 print(response.body)
                 print(response.headers)
-
             else:
                 existing_like.delete()
             return redirect('/feed/')
@@ -220,15 +196,13 @@ def comment_view(request):
             print(response.status_code)
             print(response.body)
             print(response.headers)
-
-
             return redirect('/feed/')
         else:
             return redirect('/feed/')
     else:
         return redirect('/login')
 
-
+#Method to create session toen for logged in user
 def check_validation(request):
     if request.COOKIES.get('session_token'):
         session = SessionToken.objects.filter(session_token=request.COOKIES.get('session_token')).first()
@@ -239,14 +213,10 @@ def check_validation(request):
     else:
         return None
 
-
-
-
 #Logging out
 def logout_view(requests):
     response = HttpResponseRedirect('/login/')
     response.delete_cookie('session_token')
-
     return response
 
 
